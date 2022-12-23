@@ -13,8 +13,18 @@ const initialState = [
 const postsSlice = createSlice({
     name: 'posts',
     initialState,
-    reducers: {}
+    reducers: {
+        // Here, we are adding a postAdded function that will receive two argumetns
+        // 1. the current state value
+        // 2. the action object that was dispatched
+        // In this case, the state argumennt will be the array of posts by itself
+        postAdded(state, action){
+            state.push(action.payload)
+        }
+    }
 })
+
+export const { postAdded } = postsSlice.actions
 
 export default postsSlice.reducer
 
