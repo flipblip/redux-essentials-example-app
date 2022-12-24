@@ -33,7 +33,7 @@ export const AddPostForm = () => {
 
     const onSavePostClicked = () =>{
         if (title && content){
-            dispatch(postAdded(title, content))
+            dispatch(postAdded(title, content, userId))
 
             setTitle('')
             setContent('')
