@@ -13,7 +13,7 @@ export const AddPostForm = () => {
     const onContentChanged = e => setContent(e.target.value)
 
     // To dispatch actions from this component, we need access to the
-    // store's dispatch function by calluing useDispatch(postAdded()) in
+    // store's dispatch function by calling useDispatch(postAdded()) in
     // the click handler, effectively putting together our post object with
     // all the content.
 
