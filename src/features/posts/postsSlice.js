@@ -1,4 +1,5 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { sub } from "date-fns";
 // ----------------- Main Posts Feed --------------------------------
         // -The main feature of the social media feed app will be a list of posts
 
@@ -6,8 +7,8 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 // We'll import createSlice, define the initial posts array, and pass thatt
 // to createSlice, and export the posts reducer function that createSlice created for us
 const initialState = [
-    { id: '1', title: 'First Post!', content: 'Hello!' },
-    { id: '2', title: 'Second Post', content: 'More text' }
+    { id: '1', title: 'First Post!', content: 'Hello!', date: sub(new Date(), { minutes: 10 }).toISOString() },
+    { id: '2', title: 'Second Post', content: 'More text', date: sub(new Date(), { minutes: 5 }).toISOString() }
 ]
 
 const postsSlice = createSlice({
@@ -33,6 +34,7 @@ const postsSlice = createSlice({
             return{
                 payload: {
                     id: nanoid(),
+                    date: new Date().toISOString(),
                     title,
                     content,
                     user: userId
