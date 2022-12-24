@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 // ----------------- Main Posts Feed --------------------------------
         // -The main feature of the social media feed app will be a list of posts
 
@@ -18,8 +18,31 @@ const postsSlice = createSlice({
         // 1. the current state value
         // 2. the action object that was dispatched
         // In this case, the state argumennt will be the array of posts by itself
-        postAdded(state, action){
+        postAdded: {
+            reducer(state, action){
             state.push(action.payload)
+        },
+
+        // ------- createSlice "prepare callback" ------
+        // This callback function can take multiple arguments then return adn
+        // object with the payload field inside.
+        // We can generate unique IDs or run other synchrnous logic dictating
+        // what values should go into the action object.
+
+        prepare(title, content){
+            return{
+                payload: {
+                    id: nanoid(),
+                    title,
+                    content
+                }
+            }
+        }
+            // With this, our AddPostForm component doesn't have to worry about
+            // what the payload object looks like.
+            // The action creator takes care of putting this together the right way.
+            // We can now upadt the component so that it passes in title and content
+            // as arguments when it dispatches postAdded
         },
 
         // ------ Updating Post Entries
@@ -31,6 +54,7 @@ const postsSlice = createSlice({
         postUpdated(state, action){
             const { id, title, content } = action.payload
             const existingPost = state.find(post => post.id === id)
+
             if (existingPost){
                 existingPost.title = title
                 existingPost.content = content
