@@ -29,12 +29,13 @@ const postsSlice = createSlice({
         // We can generate unique IDs or run other synchrnous logic dictating
         // what values should go into the action object.
 
-        prepare(title, content){
+        prepare(title, content, userId){
             return{
                 payload: {
                     id: nanoid(),
                     title,
-                    content
+                    content,
+                    user: userId
                 }
             }
         }
