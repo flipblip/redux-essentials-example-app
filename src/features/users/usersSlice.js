@@ -13,3 +13,7 @@ const usersSlice = createSlice({
 })
 
 export default usersSlice.reducer
+
+// At the moment, we will leave the reducers field as an empty object.
+// Next, we'll need to import the usersReducer into our store file and add it to the
+// store setup
