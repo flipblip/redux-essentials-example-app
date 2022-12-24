@@ -20,11 +20,26 @@ const postsSlice = createSlice({
         // In this case, the state argumennt will be the array of posts by itself
         postAdded(state, action){
             state.push(action.payload)
+        },
+
+        // ------ Updating Post Entries
+        // We need to update our postSlice to create a new reducer function
+        // and action so that the store knows how to update the posts.
+        // We will add a new postUpdated function which will take the ID of the post
+        // we're updating plus the new title and content that the user has typed in.
+
+        postUpdated(state, action){
+            const { id, title, content } = action.payload
+            const existingPost = state.find(post => post.id === id)
+            if (existingPost){
+                existingPost.title = title
+                existingPost.content = content
+            }
         }
     }
 })
 
-export const { postAdded } = postsSlice.actions
+export const { postAdded, postUpdated } = postsSlice.actions
 
 export default postsSlice.reducer
 
